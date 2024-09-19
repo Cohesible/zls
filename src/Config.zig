@@ -83,4 +83,7 @@ global_cache_path: ?[]const u8 = null,
 /// When false, the function signature of completion results is hidden. Improves readability in some editors
 completion_label_details: bool = true,
 
+/// Path to a Zig file for building native JavaScript modules
+js_lib_path: ?[]const u8 = null,
+
 // DO NOT EDIT

@@ -133,6 +133,11 @@
             "description": "When false, the function signature of completion results is hidden. Improves readability in some editors",
             "type": "boolean",
             "default": true
+        },
+        "js_lib_path": {
+            "description": "Path to a Zig file for building native JavaScript modules",
+            "type": "string",
+            "default": null
         }
     }
 }

@@ -74,6 +74,7 @@ The following options are currently available.
 | `build_runner_path` | `?[]const u8` | `null` | Path to the `build_runner.zig` file provided by ZLS. null is equivalent to `${executable_directory}/build_runner.zig` |
 | `global_cache_path` | `?[]const u8` | `null` | Path to a directory that will be used as zig's cache. null is equivalent to `${KnownFolders.Cache}/zls` |
 | `completion_label_details` | `bool` | `true` | When false, the function signature of completion results is hidden. Improves readability in some editors |
+| `js_lib_path` | `?[]const u8` | `null` | Path to a Zig file for building native JavaScript modules |
 <!-- DO NOT EDIT -->
 
 ### Per-build Configuration Options

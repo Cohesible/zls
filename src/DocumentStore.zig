@@ -42,6 +42,7 @@ pub fn computeHash(bytes: []const u8) Hash {
 }
 
 pub const Config = struct {
+    js_lib_path: ?[]const u8,
     zig_exe_path: ?[]const u8,
     zig_lib_path: ?[]const u8,
     build_runner_path: ?[]const u8,
@@ -50,6 +51,7 @@ pub const Config = struct {
 
     pub fn fromMainConfig(config: @import("Config.zig")) Config {
         return .{
+            .js_lib_path = config.js_lib_path,
             .zig_exe_path = config.zig_exe_path,
             .zig_lib_path = config.zig_lib_path,
             .build_runner_path = config.build_runner_path,
@@ -1580,7 +1582,11 @@ pub fn uriFromImportStr(self: *DocumentStore, allocator: std.mem.Allocator, hand
     const tracy_zone = tracy.trace(@src());
     defer tracy_zone.end();
 
-    if (std.mem.eql(u8, import_str, "std")) {
+    if (std.mem.eql(u8, import_str, "js")) {
+        const js_lib_path = self.config.js_lib_path orelse return null;
+
+        return try URI.fromPath(allocator, js_lib_path);
+    } else if (std.mem.eql(u8, import_str, "std")) {
         const zig_lib_path = self.config.zig_lib_path orelse return null;
 
         const std_path = std.fs.path.resolve(allocator, &[_][]const u8{ zig_lib_path, "./std/std.zig" }) catch |err| switch (err) {
